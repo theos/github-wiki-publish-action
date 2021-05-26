@@ -23,8 +23,8 @@ if [ -z "$GITHUB_ACTOR" ]; then
     exit 1
 fi
 
-if [ -z "$GITHUB_REPOSITORY" ]; then
-    error "GITHUB_REPOSITORY environment variable is not set"
+if [ -z "$GH_WIKI_REPOSITORY" ]; then
+    error "GH_WIKI_REPOSITORY environment variable is not set"
     exit 1
 fi
 
@@ -40,7 +40,7 @@ if [ -z "${WIKI_COMMIT_MESSAGE:-}" ]; then
     WIKI_COMMIT_MESSAGE='Automatically publish wiki'
 fi
 
-GIT_REPOSITORY_URL="https://${GH_PERSONAL_ACCESS_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.wiki.git"
+GIT_REPOSITORY_URL="https://${GH_PERSONAL_ACCESS_TOKEN}@${GITHUB_SERVER_URL#https://}/${GH_WIKI_REPOSITORY}.wiki.git"
 
 debug "Checking out wiki repository"
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
